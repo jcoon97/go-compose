@@ -38,7 +38,7 @@ func (c *Configuration) throwError(err error) {
 	}
 }
 
-func (c *Configuration) WriteFile(path string) {
+func (c *Configuration) WriteFile(path string) (int, string) {
 	p := ""
 
 	if path != "" {
@@ -52,8 +52,9 @@ func (c *Configuration) WriteFile(path string) {
 	defer f.Close()
 
 	b, err := yaml.Marshal(&c)
-	_, err = f.Write(b)
+	cnt, err := f.Write(b)
 	c.throwError(err)
+	return cnt, p
 }
 
 func NewConfiguration(service Service) *Configuration {

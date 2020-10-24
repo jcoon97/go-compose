@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/jcoon97/go-compose/writer"
 	"github.com/spf13/cobra"
 )
@@ -24,7 +25,8 @@ var generateMongoCmd = &cobra.Command{
 		}
 
 		c := writer.NewConfiguration(s)
-		c.WriteFile(outputPath)
+		cnt, path := c.WriteFile(outputPath)
+		fmt.Printf("Successfully wrote %d byte(s) to the following location: %s\n", cnt, path)
 	},
 }
 
